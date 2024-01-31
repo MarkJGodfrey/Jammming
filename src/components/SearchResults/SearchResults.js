@@ -6,7 +6,8 @@ export default function SearchResults(props) {
   return (
     <div>
       <h2>Results</h2>
-      <TrackList  />
+
+      <TrackList  tracklist={props.searchResults} playlistTracks={props.playlistTracks} onAdd={props.onAdd} onRemove={props.onRemove} type='searchResults'/>
     </div>
   );
 };

@@ -8,7 +8,12 @@ export default function SearchBar(props) {
   };
   const handleSearch = (e) => {
     e.preventDefault();//don't know if this is required
-    props.onSearch(e.target.value);
+    props.onSearch(searchText);
+  };
+  const onEnter = (e) => {
+    if(e.key==='Enter'){
+      handleSearch(e);
+    }
   };
 
   return (
@@ -18,7 +23,8 @@ export default function SearchBar(props) {
         aria-label='Enter A Song Title' 
         placeholder="Enter A Song Title" 
         value={searchText} 
-        onChange={handleTextChange} 
+        onChange={handleTextChange}
+        onKeyDown={onEnter}
         />
       <button className="SearchButton" onClick={handleSearch}>SEARCH</button>
     </div>
