@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Playlist from "../Playlist/Playlist";
 import SearchBar from "../SearchBar/SearchBar";
@@ -12,6 +12,9 @@ export default function App() {
   };
 
   const [playlistTracks, setPlaylistTracks] = useState([]);
+
+  // alert(newTrackList);
+  // alert(searchResults);
   const addTrack = (track) => {
     setPlaylistTracks((prevTracks)=>[...prevTracks, track]);
   };
@@ -28,7 +31,13 @@ export default function App() {
     setPlaylistName('');
     setPlaylistTracks([]);
   };
-
+  const [newTrackList, setNewTrackList] = useState([]);
+  const updateSearchResults = () => {
+    setNewTrackList(searchResults.filter((track)=>{
+      return playlistTracks.every((playlistTrack)=>playlistTrack.id!==track.id)
+    }))
+  };
+  useEffect(updateSearchResults,[searchResults, playlistTracks]);
   return (
     <div className='main'>
       <header>
@@ -39,10 +48,8 @@ export default function App() {
           <SearchBar onSearch={onSearch} />
           <div className="Lists">
             <SearchResults
-            searchResults={searchResults}
+            searchResults={newTrackList}
             onAdd={addTrack}
-            onRemove={removeTrack}
-            playlistTracks={playlistTracks}
             />
             <Playlist
             playlistName={playlistName}

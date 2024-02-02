@@ -36,7 +36,7 @@ export default function Playlist(props) {
           value={nameText}
           autoFocus
           />
-          <button onClick={handleNameChange}>CONFIRM NAME</button>
+          <button className='ConfirmName' onClick={handleNameChange}>CONFIRM NAME</button>
         </div>
       )
 
@@ -44,7 +44,7 @@ export default function Playlist(props) {
       return (
         <div>
           <h2>{props.playlistName}</h2>
-          <button onClick={()=>{setInputRequired(true)}}>Change Playlist Name</button>
+          <button className='ChangeName' onClick={()=>{setInputRequired(true)}}>Change Playlist Name</button>
         </div>
       )
     }
@@ -56,9 +56,8 @@ export default function Playlist(props) {
       <button className='Save' onClick={handleSave}>SAVE TO SPOTIFY</button>
       <TrackList
       tracklist={props.playlistTracks}
-      playlistTracks={props.playlistTracks}
       onRemove={props.onRemove}
-      type='playlist'
+      canAdd={false}
       />
     </div>
   );

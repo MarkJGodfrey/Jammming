@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 5px;
     align-items: center;
+    border-top: 1px solid rgba(90,135,255,1);
 }
 .TrackInformation{
     text-align: left;
@@ -15,7 +16,7 @@
 .TrackInformation p{
     display: inline;
 }
-.AddTrack, .RemoveTrack{
+.AddRemove{
     font-size: 20px;
     background-color: rgba(10,15,30,0.7);
     box-shadow: 0 0 10px rgba(60,90,180,0.8);
@@ -24,9 +25,9 @@
     width: 40px;
     height: 40px;
 }
-.AddTrack:hover, .RemoveTrack:hover{
+.AddRemove:hover{
     background-color: rgba(30,45,90,0.7);
 }
-.AddTrack:active, .RemoveTrack:active{
+.AddRemove:active{
     background-color: rgba(50,75,150,0.7);
 }

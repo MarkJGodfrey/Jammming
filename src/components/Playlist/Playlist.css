@@ -18,7 +18,7 @@
 .Playlist input:hover{
     background-color: rgba(20,30,60,0.7);
 }
-.Playlist button:not(.AddTrack, .RemoveTrack){
+.ConfirmName, .ChangeName, .Save{
     font-size: 16px;
     color: #000;
     background-color: rgb(90,135,255);
@@ -26,11 +26,11 @@
     border: 1px solid rgb(120,180,255);
     border-radius: 10px;
 }
-.Playlist button:not(.AddTrack, .RemoveTrack):hover{
+.ConfirmName:hover, .ChangeName:hover, .Save:hover{
     background-color: rgb(105,157,255);
     border: 1px solid rgb(135,202,255);
 }
-.Playlist button:not(.AddTrack, .RemoveTrack):active{
+.ConfirmName:hover, .ChangeName:hover, .Save:active{
     background-color: rgb(120,180,255);
     border: 1px solid rgb(150,250,255);
 }

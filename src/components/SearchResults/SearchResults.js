@@ -8,10 +8,8 @@ export default function SearchResults(props) {
       <h2>Results</h2>
       <TrackList
       tracklist={props.searchResults}
-      playlistTracks={props.playlistTracks}
       onAdd={props.onAdd}
-      onRemove={props.onRemove}
-      type='searchResults'
+      canAdd={true}
       />
     </div>
   );
