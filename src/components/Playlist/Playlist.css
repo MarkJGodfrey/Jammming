@@ -1,0 +1,39 @@
+.Playlist{
+    grid-column-start: 4;
+    padding: 10px 20px 10px 20px;
+    background-color: rgba(10,15,30,0.7);
+    box-shadow: 0 0 10px rgba(60,90,180,0.8);
+    border: 1px solid rgba(90,135,255,1);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+.Playlist input{
+    font-size: 16px;
+    background-color: rgba(10,15,30,0.7);
+    box-shadow: 0 0 10px rgba(60,90,180,0.8);
+    border: 1px solid rgba(90,135,255,1);
+    border-radius: 10px;
+    margin-right: 8px;
+}
+.Playlist input:hover{
+    background-color: rgba(20,30,60,0.7);
+}
+.Playlist button:not(.AddTrack, .RemoveTrack){
+    font-size: 16px;
+    color: #000;
+    background-color: rgb(90,135,255);
+    box-shadow: 0 0 10px rgba(60,90,180,0.8);
+    border: 1px solid rgb(120,180,255);
+    border-radius: 10px;
+}
+.Playlist button:not(.AddTrack, .RemoveTrack):hover{
+    background-color: rgb(105,157,255);
+    border: 1px solid rgb(135,202,255);
+}
+.Playlist button:not(.AddTrack, .RemoveTrack):active{
+    background-color: rgb(120,180,255);
+    border: 1px solid rgb(150,250,255);
+}
+.Save{
+    margin: 8px;
+}

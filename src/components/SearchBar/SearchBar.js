@@ -7,7 +7,7 @@ export default function SearchBar(props) {
     setSearchText(e.target.value);
   };
   const handleSearch = (e) => {
-    e.preventDefault();//don't know if this is required
+    e.preventDefault();
     props.onSearch(searchText);
   };
   const onEnter = (e) => {
@@ -25,6 +25,7 @@ export default function SearchBar(props) {
         value={searchText} 
         onChange={handleTextChange}
         onKeyDown={onEnter}
+        autoFocus
         />
       <button className="SearchButton" onClick={handleSearch}>SEARCH</button>
     </div>

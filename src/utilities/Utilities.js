@@ -1,5 +1,5 @@
-const clientId = '79c68934d5bc447686729b87e0c3acc1'; // Insert client ID here.
-let accessToken;
+const clientId = '79c68934d5bc447686729b87e0c3acc1';
+let accessToken='';
 
 const Utilities = {
   getAccessToken() {
@@ -15,51 +15,58 @@ const Utilities = {
       setTimeout(() => accessToken = '', expiresIn * 1000);
       return accessToken;
     } else {
-    const accessUrl = `https://accounts.spotify.com/authorize?scope=playlist-modify-public&response_type=token&redirect_uri=http://localhost:3000/&client_id=${clientId}`;
-    location = accessUrl;
+      const accessUrl = `https://accounts.spotify.com/authorize?scope=playlist-modify-public&response_type=token&redirect_uri=http://localhost:3000&client_id=${clientId}`;
+      location = accessUrl;
     }
   },
-// https://accounts.spotify.com/authorize?scope=playlist-modify-public&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&client_id=&flow_ctx=a81a0567-2b04-4d66-853a-faf1ff3cf3aa%3A1706386355
-  search(term) {
-    // const accessToken = Utilities.getAccessToken();
-  //   response = await fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`
-  //     }
-  //   });
-  //   const jsonResponse = await response.json();
-  //   if (!jsonResponse.tracks) {
-  //       return [];
-  //   }
-  //   return jsonResponse.tracks.items.map(track => ({
-  //   id: track.id,
-  //   name: track.name,
-  //   artist: track.artists[0].name,
-  //   album: track.album.name,
-  //   uri: track.uri
-  //   }));
-  // },
-  return [{
-    id: "1",
-    name: "Yellow Smoke",
-    artist: "Bobby Steele",
-    album: "Nothing in the way",
-    uri: "http//hwfbwfbak"
-  },{
-    id: "2",
-    name: "Teenage Soldier",
-    artist: "Jonny Boy",
-    album: "Death of the Paragon",
-    uri: "http//hwfbrhaefkna"
-  },{
-    id: "3",
-    name: "Letters Never Sent",
-    artist: "Wayne Gunn",
-    album: "Twilight Swamp",
-    uri: "http//hyukgkygurae"
-  }];
-}
+  
+ async search(term) {
+    const accessToken = Utilities.getAccessToken();
+    const response = await fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    const jsonResponse = await response.json();
+    if (!jsonResponse.tracks) {
+        return [];
+    }
+    return jsonResponse.tracks.items.map(track => ({
+    id: track.id,
+    name: track.name,
+    artist: track.artists[0].name,
+    album: track.album.name,
+    uri: track.uri
+    }));
+  },
+  savePlaylist(name, tracks) {
+    if (!(name && tracks.length)) {
+      return;
+    }
+    const trackUris = tracks.map((track)=>track.uri);
+    const accessToken = Utilities.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+    let userId;
 
+    return fetch('https://api.spotify.com/v1/me', {headers: headers}
+    ).then(response => response.json()
+    ).then(jsonResponse => {
+      userId = jsonResponse.id;
+      return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        headers: headers,
+        method: 'POST',
+        body: JSON.stringify({name: name})
+      }).then(response => response.json()
+      ).then(jsonResponse => {
+        const playlistId = jsonResponse.id;
+        return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+          headers: headers,
+          method: 'POST',
+          body: JSON.stringify({uris: trackUris})
+        }).then(response1=>alert(response1));
+      });
+    });
+  }
 };
 
 export default Utilities;

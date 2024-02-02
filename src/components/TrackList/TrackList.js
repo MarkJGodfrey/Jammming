@@ -11,7 +11,7 @@ export default function TrackList(props) {
     }
   }
   return (
-    <div className="TrackList">{typeof(props.tracklist)}
+    <div className="TrackList">
       {props.tracklist.map((track)=>{
         return (
           <Track 
@@ -19,7 +19,8 @@ export default function TrackList(props) {
           key={track.id}
           onAdd={props.onAdd}
           onRemove={props.onRemove}
-          canRemove={canRemove(track)}/>
+          canRemove={canRemove(track)}
+          />
         );
       })}
     </div>

@@ -1,0 +1,16 @@
+.SearchResults{
+    grid-column-start: 2;
+    padding: 10px 20px 10px 20px;
+    background-color: rgba(10,15,30,0.7);
+    box-shadow: 0 0 10px rgba(60,90,180,0.8);
+    border: 1px solid rgba(90,135,255,1);
+    border-radius: 10px;
+    overflow-y: scroll;
+    scrollbar-color: black;
+    scrollbar-width: thin;
+    scrollbar-arrow-color: #000;
+    scrollbar-track-color: rgba(10,15,30,0.7);
+}
+.SearchResults h2{
+    font-size: 30px;
+}

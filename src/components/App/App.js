@@ -7,8 +7,8 @@ import Utilities from "../../utilities/Utilities";
 
 export default function App() {
   const [searchResults, setSearchResults] = useState([]);
-  const onSearch = (searchText) => {
-    setSearchResults(Utilities.search(searchText));
+  async function onSearch(searchText) {
+    setSearchResults(await Utilities.search(searchText));
   };
 
   const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -23,16 +23,35 @@ export default function App() {
   const changeName = (name) => {
     setPlaylistName(name);
   };
+  const savePlaylist = () => {
+    Utilities.savePlaylist(playlistName, playlistTracks);
+    setPlaylistName('');
+    setPlaylistTracks([]);
+  };
 
   return (
-    <div>
-      <h1>Jammming</h1>
-      <div className="App">
-        <SearchBar onSearch={onSearch} />
-        
-        <div className="App-playlist">
-          <SearchResults searchResults={searchResults} playlistTracks={playlistTracks} onAdd={addTrack} onRemove={removeTrack}/>
-          <Playlist playlistName={playlistName} changeName={changeName} playlistTracks={playlistTracks} onRemove={removeTrack}/>
+    <div className='main'>
+      <header>
+        <h1>Jammming</h1>
+      </header>
+      <div className='Image'>
+        <div className="Gradient">
+          <SearchBar onSearch={onSearch} />
+          <div className="Lists">
+            <SearchResults
+            searchResults={searchResults}
+            onAdd={addTrack}
+            onRemove={removeTrack}
+            playlistTracks={playlistTracks}
+            />
+            <Playlist
+            playlistName={playlistName}
+            changeName={changeName}
+            onRemove={removeTrack}
+            playlistTracks={playlistTracks}
+            savePlaylist={savePlaylist}
+            />
+          </div>
         </div>
       </div>
     </div>
